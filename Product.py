@@ -8,8 +8,11 @@ class Product:
         self.iteminfo = (self.name,self.price,self.stock)
 
     #Displays the information
-    def __str__(self):
+    def display_information(self):
         return f"Product ID: {self.itemid}\nProduct Name: {self.name}\nPrice: {self.price}\nStock: {self.stock}\n"
+
+    def __str__(self):
+        return self.display_information()
 
     #Formats Product Details into dictionary format to load as json as Object cannot be stored in JSON
     def to_dict(self):
@@ -21,7 +24,8 @@ class PhysicalProduct(Product):
         self.weight = weight
 
     def display_information(self):
-        return f"Product ID: {self.itemid}\nProduct Name: {self.name}\nPrice: {self.price}\nStock: {self.stock}\nWeight: {self.weight}"
+        base = super().display_information()
+        return base + f"Weight: {self.weight}"
 
 class DigitalProduct(Product):
     def __init__(self, name, itemid, price, stock, download_size):
@@ -29,4 +33,11 @@ class DigitalProduct(Product):
         self.download_size = download_size
 
     def display_information(self):
-        return f"Product ID: {self.itemid}\nProduct Name: {self.name}\nPrice: {self.price}\nStock: {self.stock}\nDownload Size: {self.download_size}"
+        base = super().display_information()
+        return base + f"Download Size: {self.download_size}"
+
+
+book = PhysicalProduct("Dictionary", "P006", 20.0, 50, 30.05)
+ebook = DigitalProduct("Online Article", "P007", 5.0, 50, 300)
+print(book.display_information())
+print(ebook.display_information())
