@@ -30,20 +30,20 @@ class Product:
     def get_fulfilment_info(self):
         pass
 
-
-    @abstractmethod
     #Formats Product Details into dictionary format to load as json as Object cannot be stored in JSON
+    @abstractmethod
     def to_dict(self):
-        return{"id": self.itemid, "name": self.name, "price": self.price, "stock": self.stock}
+        pass
 
 class PhysicalProduct(Product, CanBeShipped):
-    def __init__(self, name, itemid, price, stock, weight):
+    def __init__(self, name, itemid, price, stock, weight, producttype):
         super().__init__(name,itemid,price,stock)
         self.weight = weight
+        self.producttype = producttype
 
     def display_information(self):
         base = super().display_information()
-        return base + f"Weight: {self.weight}"
+        return base + f"Weight: {self.weight}" + f"\nProduct Type: Physical"
 
     def get_fulfilment_info(self):
         return f"This product requires physical shipping."
@@ -54,22 +54,25 @@ class PhysicalProduct(Product, CanBeShipped):
         else:
             shipping_cost = 3.50
         return f"The shipping cost of {self.name} is ${shipping_cost:.2f}"
-
+    
+    def to_dict(self):
+        return{"id": self.itemid, "name": self.name, "price": self.price, "stock": self.stock, "weight": self.weight, "producttype": self.producttype}
+            
 class DigitalProduct(Product):
-    def __init__(self, name, itemid, price, stock, download_size):
+    def __init__(self, name, itemid, price, stock, download_size, producttype):
         super().__init__(name,itemid,price,stock)
         self.download_size = download_size
+        self.producttype = producttype
 
     def display_information(self):
         base = super().display_information()
-        return base + f"Download Size: {self.download_size}"
+        return base + f"Download Size: {self.download_size}\n"f"Product Type: Digital"
 
     def get_fulfilment_info(self):
             return f"This product will be delivered digitally."
 
+    def to_dict(self):
+        return{"id": self.itemid, "name": self.name, "price": self.price, "stock": self.stock, "downloadsize": self.download_size, "producttype": self.producttype}
 
-book = PhysicalProduct("Dictionary", "P006", 20.0, 50, 2000.05)
-ebook = DigitalProduct("Online Article", "P007", 5.0, 50, 300)
-print(book.calculate_shipping_cost())
 
-#print(ebook.get_fulfilment_info())
+

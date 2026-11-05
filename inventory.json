@@ -1,0 +1,2 @@
+[{"id": "P01", "name": "Physical", "price": 2.0, "stock": 2, "weight": 2.0, "producttype": "physical"}, 
+{"id": "1", "name": "Digital", "price": 1.0, "stock": 1, "downloadsize": 1.0, "producttype": "digital"}]

@@ -1,5 +1,5 @@
 #Imports
-from Product import Product
+from Product import PhysicalProduct,DigitalProduct
 import json,os
 
 #Inventory Class
@@ -24,7 +24,7 @@ class Inventory:
     #Displays all product Objects in the inventory by printing them to terminal
     def display_all(self):
         for item in self.inventory:
-            print(item)
+            print(f"{item}\n")
 
     #Update stock for particular product
     def update_stock(self,updateid):
@@ -51,31 +51,36 @@ class Inventory:
 
     #Saves the inventory to json and writes it to inventory.json
     def save_inventory(self):
+        data = []
         print("Saving inventory...\nInventory saved successfully to inventory.json")
         if len(self.inventory) != 0:
             for item in self.inventory:
-                data = [item.to_dict()]
+                data.append(item.to_dict())
             with open("inventory.json", "w") as file:
-                json.dump(data, file)
+                json.dump(data, file, indent = 4)
         else:
             print("You have no products in your inventory, saved anyways...")
             
     #Method to load inventory from inventory.json file if exists
     def load_inventory(self):
+        self.inventory = []
         try:
             file_path = "inventory.json"
             if os.path.isfile(file_path):
-                print("inventory.json found and loaded successfully.")
                 with open('inventory.json', 'r') as file:
                     data = json.load(file)
                     for i in data:
-                        self.inventory = [Product(i["id"], i["name"], i["price"], i["stock"])]
+                        if i["producttype"] == "physical":
+                            self.inventory.append(PhysicalProduct(i["name"], i["id"], i["price"], i["stock"], i["weight"], i["producttype"]))
+                        elif i["producttype"] == "digital":
+                            self.inventory.append(DigitalProduct(i["name"], i["id"], i["price"], i["stock"], i["downloadsize"], i["producttype"]))
+                    print("inventory.json found and loaded successfully.")
             else:
+                print("inventory.json not found, no inventory records loaded.")
                 return
         #Error handling for empty json file
         except json.JSONDecodeError:
             print("However, inventory.json is empty, starting with an empty inventory...")
 
-    
-product = Product       
+         
 
