@@ -19,7 +19,7 @@ def menu():
                     while True:
                         try:
                             itemid = input('ID: ')
-                            name = input('Name of Product:')
+                            name = input('Name of Product: ')
                             price = float(input('Price: '))
                             stock = int(input('Stock: '))
                             producttype = str(input("Physical or Digital? ")).lower()

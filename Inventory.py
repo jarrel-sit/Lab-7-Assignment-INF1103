@@ -43,11 +43,17 @@ class Inventory:
     def search_product(self,searchid):
         for product in self.inventory:
             if searchid == product.itemid:
-                print(product)
+                if isinstance(product,PhysicalProduct):
+                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}\n{product.calculate_shipping_cost()}")
+                elif isinstance(product,DigitalProduct):
+                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}")
+                break
             elif len(self.inventory) == 0:
                 print("Your inventory is empty, unable to search for products.")
+                break
             else:
                 print("Unable to find product, ensure that you have entered product ID in the correct format.")
+                break
 
     #Saves the inventory to json and writes it to inventory.json
     def save_inventory(self):
