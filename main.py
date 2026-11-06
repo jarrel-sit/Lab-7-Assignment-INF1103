@@ -6,7 +6,7 @@ from Inventory import Inventory
 def menu():
     while True:
         print('\n\tMenu\n=======================\n1. Display all products\n2. Add a product\n3. Update Stock\n4. Search for a product\n5. Save Inventory\n6. Exit\n=======================')
-        option = input('> \n')
+        option = input('> ')
         match(option):
             #Runs display inventory method
             case "1":
@@ -24,12 +24,12 @@ def menu():
                             stock = int(input('Stock: '))
                             producttype = str(input("Physical or Digital? ")).lower()
                             if producttype == "physical":
-                                weight = float(input("Input the weight of this product "))
+                                weight = float(input("Input the weight of this product: "))
                                 item = PhysicalProduct(name, itemid, price, stock, weight, producttype)
                                 inventory._add_product(item)
                                 break
                             elif producttype == "digital":
-                                download_size = float(input("Input the download size of this product "))
+                                download_size = float(input("Input the download size of this product (in MB): "))
                                 item = DigitalProduct(name, itemid, price, stock, download_size, producttype)
                                 inventory._add_product(item)
                                 break
@@ -41,11 +41,11 @@ def menu():
 
             #Runs update stock method
             case "3":
-                updateid = input("Please enter the Product ID of the product that you want to update the stock for. ")
+                updateid = input("\nPlease enter the Product ID of the product that you want to update the stock for.\n")
                 inventory.update_stock(updateid)
             #Runs search by ID method 
             case "4":
-                searchid = input("Please enter the Product ID of the product you are looking for. ")
+                searchid = input("\nPlease enter the Product ID of the product you are looking for.\n")
                 inventory.search_product(searchid)
             #Saving inventory to json
             case "5":

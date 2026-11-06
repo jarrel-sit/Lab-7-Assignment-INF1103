@@ -35,26 +35,24 @@ class Inventory:
                     print("Invalid Product Amount")
                 else:
                     product.stock = int(newqty)
-                    print(f"The New Stock Amount of {product.name} is now {product.stock} \n")
-            else:
-                print("Product Not Found")
-                break
+                    print(f"The New Stock Amount of {product.name} is now {product.stock} \n") 
+                    return
+        print("Product Not Found")
 
     #Searches for product by ID
     def search_product(self,searchid):
+        if len(self.__inventory) == 0:
+                print("Your inventory is empty, unable to search for products.")
+                return
         for product in self.__inventory:
             if searchid == product.itemid:
                 if isinstance(product,PhysicalProduct):
-                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}\n{product.calculate_shipping_cost()}")
+                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}\n{product._calculate_shipping_cost()}")
                 elif isinstance(product,DigitalProduct):
                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}")
-                break
-            elif len(self.__inventory) == 0:
-                print("Your inventory is empty, unable to search for products.")
-                break
-            else:
-                print("Unable to find product, ensure that you have entered product ID in the correct format.")
-                break
+                return
+        print("Unable to find product, ensure that you have entered product ID in the correct format.")
+                
 
     #Saves the inventory to json and writes it to inventory.json
     def save_inventory(self):

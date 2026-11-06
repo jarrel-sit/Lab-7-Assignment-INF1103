@@ -5,7 +5,7 @@ import math
 #CanBeShipped Interface
 class CanBeShipped(ABC):
     @abstractmethod
-    def calculate_shipping_cost(self):
+    def _calculate_shipping_cost(self):
         pass
 
 
@@ -15,12 +15,12 @@ class Product:
         self.name = name
         self.itemid = itemid
         self._price = price
-        self._stock = stock
+        self.stock = stock
 
     #Displays the information
     @abstractmethod
     def display_information(self):
-        return f"Product ID: {self.itemid}\nProduct Name: {self.name}\nPrice: {self._price}\nStock: {self._stock}\n"
+        return f"Product ID: {self.itemid}\nProduct Name: {self.name}\nPrice: {self._price}\nStock: {self.stock}\n"
 
     def __str__(self):
         return self.display_information()
@@ -48,7 +48,7 @@ class PhysicalProduct(Product, CanBeShipped):
     def get_fulfilment_info(self):
         return f"This product requires physical shipping."
 
-    def calculate_shipping_cost(self):
+    def _calculate_shipping_cost(self):
         if self.weight > 200:
             shipping_cost = math.ceil(self.weight/200) * 3.50
         else:
@@ -56,7 +56,7 @@ class PhysicalProduct(Product, CanBeShipped):
         return f"The shipping cost of {self.name} is ${shipping_cost:.2f}"
     
     def to_dict(self):
-        return{"id": self.itemid, "name": self.name, "price": self._price, "stock": self._stock, "weight": self.weight, "producttype": self.producttype}
+        return{"id": self.itemid, "name": self.name, "price": self._price, "stock": self.stock, "weight": self.weight, "producttype": self.producttype}
 
 #DigitalProduct Class      
 class DigitalProduct(Product):
@@ -73,7 +73,7 @@ class DigitalProduct(Product):
             return f"This product will be delivered digitally."
 
     def to_dict(self):
-        return{"id": self.itemid, "name": self.name, "price": self._price, "stock": self._stock, "downloadsize": self.download_size, "producttype": self.producttype}
+        return{"id": self.itemid, "name": self.name, "price": self._price, "stock": self.stock, "downloadsize": self.download_size, "producttype": self.producttype}
 
 
 
