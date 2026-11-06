@@ -46,7 +46,7 @@ class Inventory:
                 if isinstance(product,PhysicalProduct):
                     print(f"{product.display_information()}\n{product.get_fulfilment_info()}\n{product.calculate_shipping_cost()}")
                 elif isinstance(product,DigitalProduct):
-                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}")
+                   print(f"{product.display_information()}\n{product.get_fulfilment_info()}")
                 break
             elif len(self.inventory) == 0:
                 print("Your inventory is empty, unable to search for products.")

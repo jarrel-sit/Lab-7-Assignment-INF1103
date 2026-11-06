@@ -2,8 +2,8 @@
 from abc import ABC, abstractmethod
 import math
 
-#Interface
-class CanBeShipped():
+#CanBeShipped Interface
+class CanBeShipped(ABC):
     @abstractmethod
     def calculate_shipping_cost(self):
         pass
@@ -35,6 +35,7 @@ class Product:
     def to_dict(self):
         pass
 
+#Physical Product Class
 class PhysicalProduct(Product, CanBeShipped):
     def __init__(self, name, itemid, price, stock, weight, producttype):
         super().__init__(name,itemid,price,stock)
@@ -57,7 +58,8 @@ class PhysicalProduct(Product, CanBeShipped):
     
     def to_dict(self):
         return{"id": self.itemid, "name": self.name, "price": self.price, "stock": self.stock, "weight": self.weight, "producttype": self.producttype}
-            
+
+#DigitalProduct Class      
 class DigitalProduct(Product):
     def __init__(self, name, itemid, price, stock, download_size, producttype):
         super().__init__(name,itemid,price,stock)
