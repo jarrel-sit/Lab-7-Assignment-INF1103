@@ -5,7 +5,7 @@ import math
 #CanBeShipped Interface
 class CanBeShipped(ABC):
     @abstractmethod
-    def _calculate_shipping_cost(self):
+    def calculate_shipping_cost(self):
         pass
 
 
@@ -48,7 +48,7 @@ class PhysicalProduct(Product, CanBeShipped):
     def get_fulfilment_info(self):
         return f"This product requires physical shipping."
 
-    def _calculate_shipping_cost(self):
+    def calculate_shipping_cost(self):
         if self.weight > 200:
             shipping_cost = math.ceil(self.weight/200) * 3.50
         else:

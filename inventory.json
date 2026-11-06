@@ -14,5 +14,21 @@
         "stock": 5,
         "downloadsize": 200.0,
         "producttype": "digital"
+    },
+    {
+        "id": "Mouse",
+        "name": "Mouse",
+        "price": 2.0,
+        "stock": 2,
+        "weight": 2.0,
+        "producttype": "physical"
+    },
+    {
+        "id": "Digital",
+        "name": "Digital",
+        "price": 3.0,
+        "stock": 3,
+        "downloadsize": 200.0,
+        "producttype": "digital"
     }
 ]

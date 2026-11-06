@@ -13,7 +13,7 @@ class Inventory:
         return any(item.itemid == product_id for item in self.__inventory)
 
     #Adds Product Object into existing inventory based on boolean value from exists method
-    def _add_product(self, product_to_add):
+    def add_product(self, product_to_add):
        if self._exists(product_to_add.itemid):
            print ("Product already exists, not adding the product.")
            return False
@@ -47,7 +47,7 @@ class Inventory:
         for product in self.__inventory:
             if searchid == product.itemid:
                 if isinstance(product,PhysicalProduct):
-                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}\n{product._calculate_shipping_cost()}")
+                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}\n{product.calculate_shipping_cost()}")
                 elif isinstance(product,DigitalProduct):
                    print(f"{product.display_information()}\n{product.get_fulfilment_info()}")
                 return
