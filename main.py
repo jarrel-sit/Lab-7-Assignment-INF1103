@@ -26,12 +26,12 @@ def menu():
                             if producttype == "physical":
                                 weight = float(input("Input the weight of this product "))
                                 item = PhysicalProduct(name, itemid, price, stock, weight, producttype)
-                                inventory.add_product(item)
+                                inventory._add_product(item)
                                 break
                             elif producttype == "digital":
                                 download_size = float(input("Input the download size of this product "))
                                 item = DigitalProduct(name, itemid, price, stock, download_size, producttype)
-                                inventory.add_product(item)
+                                inventory._add_product(item)
                                 break
                             else:
                                 raise ValueError

@@ -1,18 +1,10 @@
 [
     {
         "id": "P01",
-        "name": "Book",
+        "name": "Laptop",
         "price": 50.0,
         "stock": 3,
-        "weight": 30.0,
+        "weight": 20.0,
         "producttype": "physical"
-    },
-    {
-        "id": "P02",
-        "name": "Ebook",
-        "price": 20.5,
-        "stock": 4,
-        "downloadsize": 50.0,
-        "producttype": "digital"
     }
 ]
